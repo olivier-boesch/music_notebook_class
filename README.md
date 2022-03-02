@@ -2,11 +2,10 @@
 Music class for jupyter notebooks
 
 ----
-Help on module music:
 
-NAME
-    music
+Documentation:
 
+~~~
 CLASSES
     builtins.Exception(builtins.BaseException)
         MusicError
@@ -50,8 +49,7 @@ CLASSES
      |      parameters:
      |          periods: number of periods to display. - defaults to None
      |              when the value is None, displays the entire data set
-     |  
-     |  
+     |
      |  ----------------------------------------------------------------------
      |  Data and other attributes defined here:
      |  
@@ -61,4 +59,11 @@ CLASSES
     
     class MusicError(builtins.Exception)
      |  MusicError: Exceptions for the Music class
-
+     |  
+     |  Method resolution order:
+     |      MusicError
+     |      builtins.Exception
+     |      builtins.BaseException
+     |      builtins.object
+     |  
+~~~
