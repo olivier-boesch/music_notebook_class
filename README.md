@@ -1,11 +1,22 @@
 # music_notebook_class
 Music class for jupyter notebooks
 
+as notebook or python module (use as hidden lib in capytale)
+
 ----
 
 Documentation:
 
 ~~~
+Help on module music:
+
+NAME
+    music
+
+DESCRIPTION
+    Music making helping class for jupyter notebooks
+        Olivier Boesch (c) 2022
+
 CLASSES
     builtins.Exception(builtins.BaseException)
         MusicError
@@ -39,23 +50,31 @@ CLASSES
      |          generate: should the data be generated automatically (internal use only) - defaults to True
      |  
      |  generate_data(self)
-     |      generate_data: generate sound data from parameters (frequency, duration, framerate and volume
+     |      generate_data: generate sound data from parameters (frequency, duration, framerate and volume)
      |  
-     |  play(self)
-     |      play: display of the sound reader
+     |  play(self, autoplay=True)
+     |      play: display of the sound reader using IPython.display.Audio
      |  
      |  plot(self, periods=None)
      |      plot: plot the data using matplotlib
      |      parameters:
      |          periods: number of periods to display. - defaults to None
      |              when the value is None, displays the entire data set
-     |
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors defined here:
+     |  
+     |  __dict__
+     |      dictionary for instance variables (if defined)
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
      |  ----------------------------------------------------------------------
      |  Data and other attributes defined here:
      |  
-     |  content = None
-     |  
-     |  data = None
+     |  index_plot_figure = 0
+     |      index_plot_figure: class variable to ensure each plot is made in a different figure (internal use only)
     
     class MusicError(builtins.Exception)
      |  MusicError: Exceptions for the Music class
@@ -66,4 +85,67 @@ CLASSES
      |      builtins.BaseException
      |      builtins.object
      |  
+     |  Data descriptors defined here:
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.Exception:
+     |  
+     |  __init__(self, /, *args, **kwargs)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Static methods inherited from builtins.Exception:
+     |  
+     |  __new__(*args, **kwargs) from builtins.type
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.BaseException:
+     |  
+     |  __delattr__(self, name, /)
+     |      Implement delattr(self, name).
+     |  
+     |  __getattribute__(self, name, /)
+     |      Return getattr(self, name).
+     |  
+     |  __reduce__(...)
+     |      Helper for pickle.
+     |  
+     |  __repr__(self, /)
+     |      Return repr(self).
+     |  
+     |  __setattr__(self, name, value, /)
+     |      Implement setattr(self, name, value).
+     |  
+     |  __setstate__(...)
+     |  
+     |  __str__(self, /)
+     |      Return str(self).
+     |  
+     |  with_traceback(...)
+     |      Exception.with_traceback(tb) --
+     |      set self.__traceback__ to tb and return self.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from builtins.BaseException:
+     |  
+     |  __cause__
+     |      exception cause
+     |  
+     |  __context__
+     |      exception context
+     |  
+     |  __dict__
+     |  
+     |  __suppress_context__
+     |  
+     |  __traceback__
+     |  
+     |  args
+
+FILE
+    music.py
 ~~~
