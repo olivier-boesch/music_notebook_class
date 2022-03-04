@@ -1,7 +1,8 @@
 # music_notebook_class
 Music class for jupyter notebooks
 
-as notebook or python module (use as hidden lib in capytale)
+python module (use as hidden lib in capytale)
+and test notebook
 
 ----
 
