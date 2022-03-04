@@ -19,23 +19,29 @@ class Music:
     Uses Ipython.display.Audio for display and numpy to handle data"""
     """index_plot_figure: class variable to ensure each plot is made in a different figure"""
     index_plot_figure = 0
+    default_duration = 3
+    default_framerate = 44100
 
-    def __init__(self, frequency=440, duration=3, volume=1.0, framerate=44100, generate=True):
+    def __init__(self, f=440, d=None, v=1.0, framerate=None, generate=True):
         """Music: General class for audio data creation and play
         parameters:
-            frequency: frequency in Hertz of the given note. - defaults to 440Hz
-                When storing a melody, the value is 0.
-                When storing a complex sound, the value is the lowest frequency used.
-            duration: duration in seconds of the note or the melody - defaults to 3s
-            volume: volume (amplitude) of the note (0.0->nothing, 1.0-> full volume) - defaults to 1.0
+            f: frequency in Hertz of the given note. - defaults to 440Hz
+            d: duration in seconds of the note or the melody - defaults to 3s
+            v: volume (amplitude) of the note (0.0->nothing, 1.0-> full volume) - defaults to 1.0
                 when storing a melody or a complex sound, the value is always 1.0
             framerate: framerate of the data in hertz - defaults to 44100Hz
             generate: should the data be generated automatically (internal use only) - defaults to True"""
         self.data = None
-        self.framerate = framerate
-        self.frequency = frequency
-        self.duration = duration
-        self.volume = volume
+        self.frequency = f
+        if d is not None:
+            self.duration = d
+        else:
+            self.duration = __class__.default_duration
+        self.volume = v
+        if framerate is not None:
+            self.framerate = framerate
+        else:
+            self.framerate = __class__.default_framerate
         if generate:
             self.generate_data()
 
@@ -80,7 +86,7 @@ class Music:
         if self.framerate != other.framerate or self.duration != other.duration:
             raise MusicError('Can only merge notes with the same framerate and duration')
         # we take for frequency the lowest one of the two
-        new_music = Music(frequency=min(self.frequency, other.frequency), framerate=self.framerate, duration=self.duration, generate=False)
+        new_music = Music(f=min(self.frequency, other.frequency), framerate=self.framerate, d=self.duration, generate=False)
         # we add arrays
         new_music.data = self.data + other.data
         return new_music
@@ -92,7 +98,25 @@ class Music:
         if self.framerate != other.framerate:
             raise MusicError('Can only concatenate notes with same framerate')
         # melody making: frequency set to 0 and duration set to total duration
-        new_music = Music(frequency=0, framerate=self.framerate, duration=self.duration + other.duration, generate=False)
+        new_music = Music(f=0, framerate=self.framerate, d=self.duration + other.duration, generate=False)
         new_music.data = np.concatenate((self.data, other.data))
         return new_music
 
+    def __mul__(self, other):
+        """__mult__ : use of multiplication operator (*) to multiply the frequency by a certain amount"""
+        if type(other) != int and type(other) != float:
+            raise MusicError("Can only use float or int to change frequency")
+        new_music = Music(f=self.frequency * other, d=self.duration, v=self.volume, framerate=self.framerate)
+        return new_music
+
+    def __rmul__(self, other):
+        """__rmul__: identical to __mul__ (* operator)"""
+        return self.__mul__(other)
+
+
+def test_mul():
+    from math import isclose
+    assert isclose((2.0 * Music(400)).frequency, 800)
+    assert (Music(400) * 2).frequency == 800
+    assert isclose((3.0 * Music(400)).frequency, 1200.0)
+    assert (Music(400) * 3).frequency == 1200
