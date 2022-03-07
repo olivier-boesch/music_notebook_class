@@ -65,6 +65,8 @@ class Music:
         return new_music
 
     def note(self, duration):
+        if self.melody or self.complex:
+            raise MusicError("note function works only for simple sound")
         new_music = self.copy()
         new_music.__duration = duration
         new_music._generate_data()
