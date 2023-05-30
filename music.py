@@ -109,12 +109,12 @@ class Music:
 
     @property
     def volume(self):
-        return self.__duration
+        return self.__volume
 
     @volume.setter
     def volume(self, value):
         if value < 0:
-            raise MusicError("duration must be positive")
+            raise MusicError("volume must be positive")
         self.__data = self.__data / self.__volume
         self.__volume = value
         self.__data = self.__data * self.__volume
