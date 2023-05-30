@@ -65,6 +65,7 @@ class Music:
         return new_music
 
     def note(self, duration):
+        """note: Adds duration for the sound and generate data"""
         if self.melody or self.complex:
             raise MusicError("note function works only for simple sound")
         new_music = self.copy()
@@ -79,10 +80,13 @@ class Music:
 
     @property
     def frequency(self):
+        """frequency (getter): return the frequency of the soung"""
         return self.__frequency
 
     @frequency.setter
     def frequency(self, value):
+        """frequency (setter): sets the frequency of the sound and (re)generate data
+        Only works with simple sounds (no melody, no complex sound)"""
         if value < 0:
             raise MusicError("Frequency must be positive")
         if self.__complex_sound:
@@ -94,10 +98,13 @@ class Music:
 
     @property
     def duration(self):
+        """duration (getter): returns the current duration of the sound"""
         return self.__duration
 
     @duration.setter
     def duration(self, value):
+        """duration (setter): sets the duration of the sound and (re)generate data
+        Only works with simple sounds (no melody, no complex sound)"""
         if value < 0:
             raise MusicError("duration must be positive")
         if self.__complex_sound:
@@ -109,10 +116,12 @@ class Music:
 
     @property
     def volume(self):
+        """volume (getter): returns the current volume of the sound"""
         return self.__volume
 
     @volume.setter
     def volume(self, value):
+        """volume (setter): sets the volume of the sound and modify data (if generated)"""
         if value < 0:
             raise MusicError("volume must be positive")
         self.__data = self.__data / self.__volume
@@ -158,7 +167,7 @@ class Music:
         plt.show()
 
     def plot_fft(self):
-        """plot_fft: plot the amplitudes for each frequencies found in the sound
+        """plot_fft: plot the amplitudes for each frequency found in the sound
         doc : https://gist.github.com/jedludlow/3919130
         """
         fft_data = np.fft.fft(self.__data)
