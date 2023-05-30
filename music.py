@@ -15,7 +15,7 @@ class MusicError(Exception):
 
 
 class Music:
-    """Music: General class for audio data creation and play
+    """Music: General class for audio data creation, plot and play
     Uses Ipython.display.Audio for display and numpy to handle data"""
     """__index_plot_figure: class variable to ensure each plot is made in a different figure"""
     __index_plot_figure = 0
